@@ -15,7 +15,9 @@ const Launchpage: React.FC = () => {
   let typingTimer: any;
   const doneTypingInterval = 1000;
 
-  async function handleSearchItem() {
+  async function handleSearchItem(e: FormEvent) {
+    e.preventDefault();
+    
     const { data } = await api.get('/item', {
       params: { name },
       headers: {
@@ -27,9 +29,7 @@ const Launchpage: React.FC = () => {
     console.log(items);
   }
 
-  function verifyIfUserStillTyping(e: FormEvent) {
-    e.preventDefault();
-
+  function verifyIfUserStillTyping() {
     clearTimeout(typingTimer);
 
     if (name) {
