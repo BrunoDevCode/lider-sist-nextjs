@@ -7,7 +7,7 @@ export const Container = styled.li`
   padding: 8px;
   border-radius: 4px;
   box-shadow: 2px 2px 16px -2px black;
-  height: 200px;
+  height: 230px;
   grid-gap: 2px;
 `;
 

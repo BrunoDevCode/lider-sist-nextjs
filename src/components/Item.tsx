@@ -4,6 +4,8 @@ import Link from 'next/link';
 export interface IItem {
   _id: string;
   name: string;
+  category: string;
+  quantity: number;
   cost: number;
   price: number;
   anotherPrice: number;
@@ -19,6 +21,9 @@ const Item: React.FC<IItemProps> = ({ item, handleDelete }) => {
     <Container>
       <strong>Nome</strong>
       <p>{item.name}</p>
+
+      <strong>Categoria</strong>
+      <p>{item.category}</p>
 
       <InputGroup>
         <strong>Custo :</strong>
