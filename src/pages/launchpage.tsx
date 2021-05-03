@@ -1,6 +1,6 @@
 import Item from '../components/Item';
 import Link from 'next/link';
-import { FormEvent, useCallback, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { api } from '../services/api';
 
@@ -12,17 +12,28 @@ const Launchpage: React.FC = () => {
   const [name, setName] = useState('');
   const [items, setItems] = useState([]);
 
-  // Adicionar verficação de token
+  let typingTimer: any;
+  const doneTypingInterval = 1000;
 
-  async function handleSearchItem(e: FormEvent) {
+  async function handleSearchItem() {
+    const { data } = await api.get('/item', {
+      params: { name },
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    setItems(data.items);
+    console.log(items);
+  }
+
+  function verifyIfUserStillTyping(e: FormEvent) {
     e.preventDefault();
 
-    if (name === '') {
-      setItems([]);
-    } else {
-      const response = await api.get('/item', { params: { name } });
+    clearTimeout(typingTimer);
 
-      setItems(response.data);
+    if (name) {
+      typingTimer = setTimeout(handleSearchItem, doneTypingInterval);
     }
   }
 
@@ -38,7 +49,7 @@ const Launchpage: React.FC = () => {
           <A>Novo</A>
         </Link>
 
-        <Form onKeyUp={handleSearchItem}>
+        <Form onKeyUp={verifyIfUserStillTyping}>
           <input
             type="text"
             placeholder="Produto ou Categoria"

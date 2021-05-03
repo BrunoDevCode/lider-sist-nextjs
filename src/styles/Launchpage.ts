@@ -24,8 +24,9 @@ export const List = styled.ul`
   margin-top: 32px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 210px;
-  grid-gap: 16px;
+  grid-template-rows: 230px;
+  grid-gap: 24px;
+  margin-bottom: 24px;
 `;
 
 export const Form = styled.form`
