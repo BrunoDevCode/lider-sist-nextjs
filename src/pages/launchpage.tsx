@@ -1,4 +1,4 @@
-import Item from '../components/Item';
+import Item, { IItem } from '../components/Item';
 import Link from 'next/link';
 import { FormEvent, useCallback, useState } from 'react';
 import Cookies from 'js-cookie';
