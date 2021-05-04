@@ -1,4 +1,4 @@
-import Item, { IItem } from '../components/Item';
+import Item from '../components/Item';
 import Link from 'next/link';
 import { FormEvent, useCallback, useState } from 'react';
 import Cookies from 'js-cookie';
@@ -22,7 +22,7 @@ const Launchpage: React.FC = () => {
       },
     });
 
-    setItems(data.items);
+    setItems(data);
   }
 
   function verifyIfUserStillTyping(e: FormEvent) {
@@ -31,7 +31,7 @@ const Launchpage: React.FC = () => {
     clearTimeout(time);
 
     time = setTimeout(() => {
-      handleSearchItem
+      handleSearchItem()
     }, 1000);
   }
 
