@@ -1,6 +1,6 @@
 import Item from '../components/Item';
 import Link from 'next/link';
-import { FormEvent, useCallback, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import Cookies from 'js-cookie';
 import { api } from '../services/api';
 
@@ -12,8 +12,7 @@ const Launchpage: React.FC = () => {
   const [name, setName] = useState('');
   const [items, setItems] = useState([]);
 
-  let typingTimer: any;
-  const doneTypingInterval = 1000;
+  let time: any = null;
 
   async function handleSearchItem() {
     const { data } = await api.get('/item', {
@@ -24,17 +23,16 @@ const Launchpage: React.FC = () => {
     });
 
     setItems(data.items);
-    console.log(items);
   }
 
   function verifyIfUserStillTyping(e: FormEvent) {
     e.preventDefault();
 
-    clearTimeout(typingTimer);
+    clearTimeout(time);
 
-    if (name) {
-      typingTimer = setTimeout(handleSearchItem, doneTypingInterval);
-    }
+    time = setTimeout(() => {
+      handleSearchItem
+    }, 1000);
   }
 
   const handleDeleteItem = useCallback((itemId) => {
