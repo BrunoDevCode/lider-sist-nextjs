@@ -1,10 +1,15 @@
 import Item from '../components/Item';
 import Link from 'next/link';
-import { FormEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import Cookies from 'js-cookie';
 import { api } from '../services/api';
 
 import { Container, List, Form, A } from '../styles/Launchpage';
+// Usar para fazer a paginação
+// yarn add react-js-pagination
+// https://www.npmjs.com/package/react-js-pagination
+
+let time = null;
 
 const Launchpage: React.FC = () => {
   const token = Cookies.get('@token');
@@ -12,9 +17,7 @@ const Launchpage: React.FC = () => {
   const [name, setName] = useState('');
   const [items, setItems] = useState([]);
 
-  let time: any = null;
-
-  async function handleSearchItem() {
+  async function handleSearchItem(name: string) {
     const { data } = await api.get('/item', {
       params: { name },
       headers: {
@@ -25,13 +28,11 @@ const Launchpage: React.FC = () => {
     setItems(data);
   }
 
-  function verifyIfUserStillTyping(e: FormEvent) {
-    e.preventDefault();
-
+  function verifyIfUserStillTyping() {
     clearTimeout(time);
 
     time = setTimeout(() => {
-      handleSearchItem()
+      handleSearchItem(name)
     }, 1000);
   }
 
