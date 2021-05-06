@@ -7,7 +7,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>DepSist - BHSdev</title>
+        <title>Mackarel - BHSdev</title>
       </Head>
       <Component {...pageProps} />
       <GlobalStyle />

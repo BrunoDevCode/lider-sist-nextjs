@@ -42,10 +42,6 @@ const newItem: React.FC = () => {
 
   return (
     <Container>
-      {/* <Alert>
-        <p>{createItemState}</p>
-      </Alert> */}
-
       <div>
         <Header>
           <h1>Novo produto</h1>
